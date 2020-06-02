@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: web01
+  name: web01
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5000
+  externalIPs:
+    - <MASTER_NODE_PUBLIC_IP>
+  selector:
+    app: web01

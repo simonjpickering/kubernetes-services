@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web01
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web01
+  template:
+    metadata:
+      labels:
+        app: web01
+    spec:
+      containers:
+      - image: sjpickering/web01
+        name: web01
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - mountPath: /app/phost
+          name: web01-claim0
+          readOnly: true
+      restartPolicy: Always
+      volumes:
+      - name: web01-claim0
+        hostPath:
+          path: /etc/hostname
+          type: File
